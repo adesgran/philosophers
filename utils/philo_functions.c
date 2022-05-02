@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:36:46 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 11:54:28 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 12:14:38 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	push_back_philo(t_philo *list)
 
 void	free_list_philo(t_philo *list)
 {
-	if (list->next->number != 0)
+	if (list->next->number != 1)
 		free_list_philo(list->next);
 	pthread_mutex_destroy((&list->fork));
 	free(list);

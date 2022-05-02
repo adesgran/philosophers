@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:52:51 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 11:53:30 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 11:57:10 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 typedef struct s_table
 {
+	int	n_philo;
 	int	time_die;
 	int	time_eat;
 	int	time_sleep;

@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:53:06 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 16:58:12 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:25:00 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	static_eat(t_philo *philo)
 		return ;
 	ft_print(philo, "is eating\n");
 	philo->last_eat = ft_current_time();
+	philo->times_eat++;
 	usleep(philo->table->time_eat * 1000);
 	pthread_mutex_unlock(&philo->fork);
 	pthread_mutex_unlock(&philo->previous->fork);

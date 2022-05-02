@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_if_dead.c                                    :+:      :+:    :+:   */
+/*   check_all.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 16:53:06 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 16:54:57 by adesgran         ###   ########.fr       */
+/*   Created: 2022/05/02 17:18:43 by adesgran          #+#    #+#             */
+/*   Updated: 2022/05/02 17:29:26 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-int	check_if_dead(t_philo *philo)
+static int	static_check_if_dead(t_philo *philo)
 {
 	int	res;
 
@@ -23,4 +23,35 @@ int	check_if_dead(t_philo *philo)
 		res = 0;
 	pthread_mutex_unlock(&philo->table->lock_is_dead);
 	return (res);
+}
+
+static int	static_check_all_eat(t_philo *philo)
+{
+	t_philo *current;
+
+	current = philo;
+	if (philo->times_eat < philo->table->max_eat)
+		return (0);
+	philo = philo->next;
+	while (philo != current)
+	{
+		if (philo->times_eat < philo->table->max_eat)
+			return (0);
+		philo = philo->next;
+	}
+	return (1);
+}
+
+int	check_all(t_philo *philo)
+{
+	if (ft_current_time - philo->last_eat >= philo->table->time_die)
+	{
+		kill_philo(philo);
+		return (1);
+	}
+	if (static_check_if_dead(philo))
+		return (1);
+	if (static_check_all_eat(philo))
+		return (1);
+	return (0);
 }

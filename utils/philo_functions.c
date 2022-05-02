@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:36:46 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 16:34:18 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:24:27 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	push_back_philo(t_philo *list)
 		free_list_philo(list);
 		return (3);
 	}
+	next->times_eat = 0;
 	next->last_eat = ft_current_time();
 	next->table = list->table;
 	next->next = list;

@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:52:51 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 16:55:06 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:24:09 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_table
 
 typedef struct s_philo
 {
+	int	times_eat;
 	long int	last_eat;
 	int				number;
 	pthread_mutex_t	fork;

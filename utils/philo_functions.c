@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:36:46 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 10:51:28 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 10:54:16 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ t_philo	*philo_init(int n, int die, int eat, int sleep)
 	res->n_philo = n;
 	res->time_die = die;
 	res->time_eat = eat;
-	res->time_sleep = sleep
+	res->time_sleep = sleep;
 	res->number = 0;
 	res->next = res;
-	res->previous  = res;
+	res->previous = res;
 	return (res);
 }
 
@@ -48,11 +48,9 @@ void	push_back_philo(t_philo *list)
 	next->number = list->number + 1;
 }
 
-
 void	free_list_philo(t_philo *list)
 {
 	if (list->next->number != 0)
 		free_list_philo(list->next);
 	free(list);
 }
-

@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:53:06 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 17:25:00 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:45:35 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,18 @@
 static int	static_take_fork(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->fork);
-	if (ft_current_time() - philo->last_eat >= philo->table->time_die || check_if_dead(philo))
+	if (check_all(philo))
 	{
 		pthread_mutex_unlock(&philo->fork);
-		kill_philo(philo);
 		return (1);
 	}
 	usleep(10);
 	ft_print(philo, "has taken a fork\n");
 	pthread_mutex_lock(&philo->previous->fork);
-	if (ft_current_time() - philo->last_eat >= philo->table->time_die || check_if_dead(philo))
+	if (check_all(philo))
 	{
 		pthread_mutex_unlock(&philo->fork);
 		pthread_mutex_unlock(&philo->previous->fork);
-		kill_philo(philo);
 		return (1);
 	}
 	usleep(10);
@@ -38,8 +36,8 @@ static int	static_take_fork(t_philo *philo)
 
 static void	static_eat(t_philo *philo)
 {
-	if (ft_current_time() - philo->last_eat >= philo->table->time_die)
-		kill_philo(philo);
+	if (check_all(philo))
+		return ;
 	if (static_take_fork(philo))
 		return ;
 	ft_print(philo, "is eating\n");
@@ -66,17 +64,17 @@ void	*routine_philo(void* arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->number % 2)
-		usleep(philo->table->time_eat * 1000);
+	if (philo->number % 2 == 0)
+		usleep(philo->table->time_eat * 500);
 	while (1)
 	{
-		if (check_if_dead(philo))
+		if (check_all(philo))
 			return (NULL);
 		static_eat(philo);
-		if (check_if_dead(philo))
+		if (check_all(philo))
 			return (NULL);
 		static_sleep(philo);
-		if (check_if_dead(philo))
+		if (check_all(philo))
 			return (NULL);
 		static_think(philo);
 	}

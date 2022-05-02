@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 17:18:43 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 17:29:26 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:39:56 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	static_check_all_eat(t_philo *philo)
 {
 	t_philo *current;
 
+	if (philo->table->max_eat == 0)
+		return (0);
 	current = philo;
 	if (philo->times_eat < philo->table->max_eat)
 		return (0);
@@ -44,7 +46,7 @@ static int	static_check_all_eat(t_philo *philo)
 
 int	check_all(t_philo *philo)
 {
-	if (ft_current_time - philo->last_eat >= philo->table->time_die)
+	if (ft_current_time() - philo->last_eat >= philo->table->time_die)
 	{
 		kill_philo(philo);
 		return (1);

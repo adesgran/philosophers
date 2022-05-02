@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:52:51 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 17:32:39 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:09:26 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ typedef struct s_table
 	int	time_eat;
 	int	time_sleep;
 	int	max_eat;
+	int	n_philo_max_eat;
 	pthread_mutex_t	print;
 	pthread_mutex_t	lock_is_dead;
+	pthread_mutex_t	lock_max_eat;
 	int	is_dead;
 }	t_table;
 

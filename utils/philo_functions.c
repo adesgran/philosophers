@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:36:46 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 17:24:27 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:52:32 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_philo	*philo_init(t_table *table)
 	res->table = table;
 	res->number = 1;
 	res->next = res;
+	res->times_eat = 0;
 	res->previous = res;
 	res->last_eat = ft_current_time();
 	if (pthread_mutex_init(&res->fork, NULL))

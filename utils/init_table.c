@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:46:08 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 15:59:34 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:10:01 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	init_table(int ac, char **av, t_table *table)
 {
 	table->is_dead = 0;
 	table->n_philo = ft_atoi(av[1]);
+	table->n_philo_max_eat = table->n_philo;
 	if (table->n_philo < 1)
 		return (1);
 	table->time_die = ft_atoi(av[2]);
@@ -31,6 +32,12 @@ int	init_table(int ac, char **av, t_table *table)
 	if (pthread_mutex_init(&table->lock_is_dead, NULL))
 	{
 		pthread_mutex_destroy(&table->print);
+		return (1);
+	}
+	if (pthread_mutex_init(&table->lock_max_eat, NULL))
+	{
+		pthread_mutex_destroy(&table->print);
+		pthread_mutex_destroy(&table->lock_is_dead);
 		return (1);
 	}
 	return (0);

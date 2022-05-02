@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   ft_current_time.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 14:19:25 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 16:28:31 by adesgran         ###   ########.fr       */
+/*   Created: 2022/05/02 16:23:17 by adesgran          #+#    #+#             */
+/*   Updated: 2022/05/02 16:27:40 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	ft_print(t_philo *philo, char *str)
+long int	ft_current_time(void)
 {
-	pthread_mutex_lock(&philo->table->lock_is_dead);
+	static long int	start;
+	struct timeval	time;
+
+	if (!start)
 	{
-		if (!philo->table->is_dead)
-		{
-			pthread_mutex_lock(&philo->table->print);
-			printf("%ld %d %s", ft_current_time(), philo->number, str);
-			pthread_mutex_unlock(&philo->table->print);
-		}
+		gettimeofday(&time, NULL);
+		start = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+		return (0);
 	}
-	pthread_mutex_unlock(&philo->table->lock_is_dead);
-	return ;
+	gettimeofday(&time, NULL);
+	return (start - ((time.tv_sec * 1000) + (time.tv_usec / 1000)))
 }

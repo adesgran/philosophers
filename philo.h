@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:52:51 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 15:59:03 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:27:52 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ void	ft_print(t_philo *philo, char *str);
 void	free_table(t_table *table);
 int	init_table(int ac, char **av, t_table *table);
 void	*routine_philo(void* arg);
+long int	ft_current_time(void);
 
 #endif

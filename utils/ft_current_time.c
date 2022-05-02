@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 16:23:17 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 16:27:40 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:28:56 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ long int	ft_current_time(void)
 		return (0);
 	}
 	gettimeofday(&time, NULL);
-	return (start - ((time.tv_sec * 1000) + (time.tv_usec / 1000)))
+	return (start - ((time.tv_sec * 1000) + (time.tv_usec / 1000)));
 }

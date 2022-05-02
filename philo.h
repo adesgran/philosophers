@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:52:51 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 16:27:52 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:29:23 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_table
 {

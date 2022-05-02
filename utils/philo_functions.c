@@ -6,13 +6,13 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:36:46 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 12:14:38 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:13:07 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-t_philo	*philo_init(t_table table)
+t_philo	*philo_init(t_table *table)
 {
 	t_philo	*res;
 
@@ -49,9 +49,10 @@ int	push_back_philo(t_philo *list)
 		free_list_philo(list);
 		return (3);
 	}
+	next->table = list->table;
 	next->next = list;
 	list->previous = next;
-	while (list->next != next->next)
+	while (list->next->number != 1)
 		list = list->next;
 	list->next = next;
 	next->previous = list;
@@ -63,6 +64,11 @@ void	free_list_philo(t_philo *list)
 {
 	if (list->next->number != 1)
 		free_list_philo(list->next);
+	else
+	{
+		pthread_mutex_destroy(&list->table->print);
+		free(list->table);
+	}
 	pthread_mutex_destroy((&list->fork));
 	free(list);
 }

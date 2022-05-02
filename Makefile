@@ -1,7 +1,7 @@
 NAME = philo
 
-CC = gcc
-C_FLAGS = -Wall -Wextra -Werror -pthread
+CC = gcc -pthread
+C_FLAGS = -Wall -Wextra -Werror 
 
 UTILS = $(wildcard utils/*.c)
 
@@ -25,6 +25,9 @@ fclean: clean
 		rm -r ${NAME}
 
 re: fclean all
+
+test: all
+	./${NAME} 4 200 200 200
 
 leaks: all
 	PHILO_INPUT="2 200 200 200"

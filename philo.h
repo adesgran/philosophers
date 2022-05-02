@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:52:51 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 15:01:52 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:53:25 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_table
 	int	time_sleep;
 	int	max_eat;
 	pthread_mutex_t	print;
+	pthread_mutex_t	is_dead;
 }	t_table;
 
 typedef struct s_philo
@@ -42,5 +43,8 @@ void	free_list_philo(t_philo *list);
 int		push_back_philo(t_philo *list);
 t_philo	*philo_init(t_table *table);
 void	ft_print(t_philo *philo, char *str);
+void	free_table(t_table *table);
+int	init_table(int ac, char **av, t_table *table);
+void	*routine_philo(void* arg);
 
 #endif

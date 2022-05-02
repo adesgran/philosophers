@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:52:51 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 16:29:23 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:55:06 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_table
 
 typedef struct s_philo
 {
+	long int	last_eat;
 	int				number;
 	pthread_mutex_t	fork;
 	t_table			*table;
@@ -49,5 +50,7 @@ void	free_table(t_table *table);
 int	init_table(int ac, char **av, t_table *table);
 void	*routine_philo(void* arg);
 long int	ft_current_time(void);
+void	kill_philo(t_philo *philo);
+int	check_if_dead(t_philo *philo);
 
 #endif

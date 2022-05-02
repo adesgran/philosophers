@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:36:46 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 15:47:42 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:34:18 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_philo	*philo_init(t_table *table)
 	res->number = 1;
 	res->next = res;
 	res->previous = res;
+	res->last_eat = ft_current_time();
 	if (pthread_mutex_init(&res->fork, NULL))
 	{
 		free(res);
@@ -49,6 +50,7 @@ int	push_back_philo(t_philo *list)
 		free_list_philo(list);
 		return (3);
 	}
+	next->last_eat = ft_current_time();
 	next->table = list->table;
 	next->next = list;
 	list->previous = next;

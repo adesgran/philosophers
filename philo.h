@@ -26,5 +26,8 @@ typedef	struct s_philo
 }	t_philo;
 
 int	ft_atoi(char *str);
+void	free_list_philo(t_philo *list);
+void	push_back_philo(t_philo *list);
+t_philo	*philo_init(int n, int die, int eat, int sleep);
 
 #endif

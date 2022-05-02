@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:52:51 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 10:53:12 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 11:53:30 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 # include <stdlib.h>
 # include <pthread.h>
 
-typedef struct s_fork
+typedef struct s_table
 {
-	int				philo_place;
-	pthread_mutex_t	*lock;
-	struct s_fork	*next;
-	struct s_fork	*previous;
-}	t_fork;
+	int	time_die;
+	int	time_eat;
+	int	time_sleep;
+	int	max_eat;
+}	t_table;
 
 typedef struct s_philo
 {
@@ -33,13 +33,15 @@ typedef struct s_philo
 	int				time_eat;
 	int				time_sleep;
 	int				number;
+	pthread_mutex_t	fork;
+	t_table			table;
 	struct s_philo	*next;
 	struct s_philo	*previous;
 }	t_philo;
 
 int		ft_atoi(char *str);
 void	free_list_philo(t_philo *list);
-void	push_back_philo(t_philo *list);
-t_philo	*philo_init(int n, int die, int eat, int sleep);
+int		push_back_philo(t_philo *list);
+t_philo	*philo_init(t_table table);
 
 #endif

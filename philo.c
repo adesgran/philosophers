@@ -6,16 +6,15 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 13:18:34 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/01 13:27:03 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/02 10:54:45 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	if (ac < 2)
 		return (1);
 	printf("%s\n%d\n", av[1], ft_atoi(av[1]));
 }
-

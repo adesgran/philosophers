@@ -16,11 +16,11 @@ typedef	struct s_fork
 
 typedef	struct s_philo
 {
-	int		n_philo;
-	int		time_die;
-	int		time_eat;
-	int		time_sleep;
-	int		number;
+	int				n_philo;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				number;
 	struct s_philo	*next;
 	struct s_philo	*previous;
 }	t_philo;

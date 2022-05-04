@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:53:06 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/04 13:16:13 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:11:24 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	static_take_fork_first(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->next->fork);
+	pthread_mutex_unlock(&philo->next->fork);
 	pthread_mutex_lock(&philo->previous->fork);
 	if (check_all(philo))
 	{
@@ -25,11 +27,10 @@ static int	static_take_fork_first(t_philo *philo)
 	if (philo->next == philo)
 	{
 		pthread_mutex_unlock(&philo->previous->fork);
-		usleep(1000 * philo->table->time_die);
+		ft_sleep(philo, 1000 * philo->table->time_die);
 		check_all(philo);
 		return (1);
 	}
-
 	pthread_mutex_lock(&philo->fork);
 	if (check_all(philo))
 	{
@@ -46,6 +47,11 @@ static int	static_take_fork(t_philo *philo)
 {
 	if (philo->number == 1)
 		return (static_take_fork_first(philo));
+	if (philo->number == 5)
+	{
+		pthread_mutex_lock(&philo->next->fork);
+		pthread_mutex_unlock(&philo->next->fork);
+	}
 	pthread_mutex_lock(&philo->fork);
 	if (check_all(philo))
 	{
@@ -80,7 +86,7 @@ static void	static_eat(t_philo *philo)
 		philo->table->n_philo_max_eat--;
 	pthread_mutex_unlock(&philo->table->lock_max_eat);
 	if (check_all(philo) == 0)
-		usleep(philo->table->time_eat * 1000);
+		ft_sleep(philo, philo->table->time_eat * 1000);
 	pthread_mutex_unlock(&philo->previous->fork);
 	pthread_mutex_unlock(&philo->fork);
 }
@@ -88,7 +94,7 @@ static void	static_eat(t_philo *philo)
 static void	static_sleep(t_philo *philo)
 {
 	ft_print(philo, "is sleeping\n");
-	usleep(1000 * philo->table->time_sleep);
+	ft_sleep(philo, 1000 * philo->table->time_sleep);
 }
 
 void	*routine_philo(void *arg)
@@ -97,7 +103,7 @@ void	*routine_philo(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->number % 2 == 0)
-		usleep(philo->table->time_eat * 500);
+		ft_sleep(philo, philo->table->time_eat * 500);
 	while (1)
 	{
 		if (check_all(philo))

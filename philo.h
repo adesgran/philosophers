@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:52:51 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/04 13:41:39 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/04 14:21:00 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ long int	ft_current_time(void);
 void		kill_philo(t_philo *philo);
 int			check_all(t_philo *philo);
 int			ft_print_error(void);
+int			ft_sleep(t_philo *philo, long time);
 
 #endif

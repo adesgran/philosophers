@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:36:46 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 17:52:32 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/04 12:48:16 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,20 @@ t_philo	*philo_init(t_table *table)
 	return (res);
 }
 
+static void	set_values(t_philo *next, t_philo *list)
+{
+	next->times_eat = 0;
+	next->last_eat = ft_current_time();
+	next->table = list->table;
+	next->next = list;
+}
+
 int	push_back_philo(t_philo *list)
 {
 	t_philo	*next;
 
 	if (!list)
-		return (1) ;
+		return (1);
 	next = malloc(sizeof(t_philo));
 	if (!next)
 	{
@@ -51,10 +59,7 @@ int	push_back_philo(t_philo *list)
 		free_list_philo(list);
 		return (3);
 	}
-	next->times_eat = 0;
-	next->last_eat = ft_current_time();
-	next->table = list->table;
-	next->next = list;
+	set_values(next, list);
 	list->previous = next;
 	while (list->next->number != 1)
 		list = list->next;

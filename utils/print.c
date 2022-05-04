@@ -6,11 +6,17 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:19:25 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 16:28:31 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:25:31 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
+
+int	ft_print_error(void)
+{
+	printf("Error\n");
+	return (1);
+}
 
 void	ft_print(t_philo *philo, char *str)
 {

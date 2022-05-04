@@ -6,14 +6,46 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:53:06 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 18:31:52 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:16:13 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
+static int	static_take_fork_first(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->previous->fork);
+	if (check_all(philo))
+	{
+		pthread_mutex_unlock(&philo->previous->fork);
+		return (1);
+	}
+	usleep(10);
+	ft_print(philo, "has taken a fork\n");
+	if (philo->next == philo)
+	{
+		pthread_mutex_unlock(&philo->previous->fork);
+		usleep(1000 * philo->table->time_die);
+		check_all(philo);
+		return (1);
+	}
+
+	pthread_mutex_lock(&philo->fork);
+	if (check_all(philo))
+	{
+		pthread_mutex_unlock(&philo->fork);
+		pthread_mutex_unlock(&philo->previous->fork);
+		return (1);
+	}
+	usleep(10);
+	ft_print(philo, "has taken a fork\n");
+	return (0);
+}
+
 static int	static_take_fork(t_philo *philo)
 {
+	if (philo->number == 1)
+		return (static_take_fork_first(philo));
 	pthread_mutex_lock(&philo->fork);
 	if (check_all(philo))
 	{
@@ -59,12 +91,7 @@ static void	static_sleep(t_philo *philo)
 	usleep(1000 * philo->table->time_sleep);
 }
 
-static void	static_think(t_philo *philo)
-{
-	ft_print(philo, "is thinking\n");
-}
-
-void	*routine_philo(void* arg)
+void	*routine_philo(void *arg)
 {
 	t_philo	*philo;
 
@@ -75,16 +102,13 @@ void	*routine_philo(void* arg)
 	{
 		if (check_all(philo))
 			return (NULL);
-		if (philo->next != philo)
-			static_eat(philo);
+		static_eat(philo);
 		if (check_all(philo))
 			return (NULL);
-		if (philo->next != philo)
-			static_sleep(philo);
+		static_sleep(philo);
 		if (check_all(philo))
 			return (NULL);
-		if (philo->next != philo)
-			static_think(philo);
+		ft_print(philo, "is thinking\n");
 	}
 	return (NULL);
 }

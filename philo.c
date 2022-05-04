@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 13:18:34 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 15:53:03 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:19:15 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 static void	launch_philos(t_table *table, t_philo *philos)
 {
-	int	i;
-	int	err;
-	pthread_t	id[table->n_philo + 1];
+	int			i;
+	int			err;
+	pthread_t	id[200];
 
 	i = 0;
 	while (i < table->n_philo)
 	{
-		
 		err = pthread_create(&(id[i]), NULL, &routine_philo, (void *)philos);
 		if (err)
 		{
@@ -58,13 +57,12 @@ static t_philo	*static_generate_philos(t_table *table)
 	return (res);
 }
 
-
 int	main(int ac, char **av)
 {
 	t_table	*table;
 	t_philo	*philos;
 
-	if (ac <  5 || ac > 6)
+	if (ac < 5 || ac > 6)
 		return (1);
 	table = malloc(sizeof(t_table));
 	if (!table)

@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:52:51 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/02 18:09:26 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:41:39 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@
 
 typedef struct s_table
 {
-	int	n_philo;
-	int	time_die;
-	int	time_eat;
-	int	time_sleep;
-	int	max_eat;
-	int	n_philo_max_eat;
+	int				n_philo;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				max_eat;
+	int				n_philo_max_eat;
 	pthread_mutex_t	print;
 	pthread_mutex_t	lock_is_dead;
 	pthread_mutex_t	lock_max_eat;
-	int	is_dead;
+	int				is_dead;
 }	t_table;
 
 typedef struct s_philo
 {
-	int	times_eat;
-	long int	last_eat;
+	int				times_eat;
+	long int		last_eat;
 	int				number;
 	pthread_mutex_t	fork;
 	t_table			*table;
@@ -44,16 +44,17 @@ typedef struct s_philo
 	struct s_philo	*previous;
 }	t_philo;
 
-int		ft_atoi(char *str);
-void	free_list_philo(t_philo *list);
-int		push_back_philo(t_philo *list);
-t_philo	*philo_init(t_table *table);
-void	ft_print(t_philo *philo, char *str);
-void	free_table(t_table *table);
-int	init_table(int ac, char **av, t_table *table);
-void	*routine_philo(void* arg);
+int			ft_atoi(char *str);
+void		free_list_philo(t_philo *list);
+int			push_back_philo(t_philo *list);
+t_philo		*philo_init(t_table *table);
+void		ft_print(t_philo *philo, char *str);
+void		free_table(t_table *table);
+int			init_table(int ac, char **av, t_table *table);
+void		*routine_philo(void *arg);
 long int	ft_current_time(void);
-void	kill_philo(t_philo *philo);
-int	check_all(t_philo *philo);
+void		kill_philo(t_philo *philo);
+int			check_all(t_philo *philo);
+int			ft_print_error(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 13:18:34 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/04 14:53:42 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/06/05 14:58:05 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	launch_philos(t_table *table, t_philo *philos)
 			ft_print(philos, "Error while creating a philo thread\n");
 			return ;
 		}
-		usleep(10);
+		usleep(100);
 		philos = philos->next;
 		i++;
 	}

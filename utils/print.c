@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:19:25 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/04 13:25:31 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/06/05 16:06:37 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ int	ft_print_error(void)
 
 void	ft_print(t_philo *philo, char *str)
 {
+	pthread_mutex_lock(&philo->table->lock_max_eat);
+	if (philo->table->n_philo_max_eat == 0)
+	{
+		pthread_mutex_unlock(&philo->table->lock_max_eat);
+		return ;
+	}
+	pthread_mutex_unlock(&philo->table->lock_max_eat);
 	pthread_mutex_lock(&philo->table->lock_is_dead);
 	{
 		if (!philo->table->is_dead)

@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:53:06 by adesgran          #+#    #+#             */
-/*   Updated: 2022/05/04 15:11:24 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/06/05 16:10:48 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static int	static_take_fork_first(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->next->fork);
-	pthread_mutex_unlock(&philo->next->fork);
 	pthread_mutex_lock(&philo->previous->fork);
 	if (check_all(philo))
 	{
@@ -47,11 +45,6 @@ static int	static_take_fork(t_philo *philo)
 {
 	if (philo->number == 1)
 		return (static_take_fork_first(philo));
-	if (philo->number == 5)
-	{
-		pthread_mutex_lock(&philo->next->fork);
-		pthread_mutex_unlock(&philo->next->fork);
-	}
 	pthread_mutex_lock(&philo->fork);
 	if (check_all(philo))
 	{
@@ -94,7 +87,8 @@ static void	static_eat(t_philo *philo)
 static void	static_sleep(t_philo *philo)
 {
 	ft_print(philo, "is sleeping\n");
-	ft_sleep(philo, 1000 * philo->table->time_sleep);
+	ft_sleep(philo, 1000 * (long long int)philo->table->time_sleep);
+	ft_print(philo, "end sleeping\n");
 }
 
 void	*routine_philo(void *arg)
@@ -109,12 +103,15 @@ void	*routine_philo(void *arg)
 		if (check_all(philo))
 			return (NULL);
 		static_eat(philo);
+		usleep(10);
 		if (check_all(philo))
 			return (NULL);
 		static_sleep(philo);
+		usleep(10);
 		if (check_all(philo))
 			return (NULL);
 		ft_print(philo, "is thinking\n");
+		usleep(10);
 	}
 	return (NULL);
 }

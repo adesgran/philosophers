@@ -6,7 +6,7 @@
 /*   By: adesgran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:53:06 by adesgran          #+#    #+#             */
-/*   Updated: 2022/06/05 16:10:48 by adesgran         ###   ########.fr       */
+/*   Updated: 2022/06/05 16:32:01 by adesgran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static void	static_sleep(t_philo *philo)
 {
 	ft_print(philo, "is sleeping\n");
 	ft_sleep(philo, 1000 * (long long int)philo->table->time_sleep);
-	ft_print(philo, "end sleeping\n");
 }
 
 void	*routine_philo(void *arg)
